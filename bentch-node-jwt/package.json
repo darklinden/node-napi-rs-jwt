@@ -1,0 +1,20 @@
+{
+  "name": "bentch-node-jwt",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "jsonwebtoken": "^9.0.2",
+    "napi-jwt": "../napi-jwt",
+    "typescript": "^5.2.2"
+  },
+  "devDependencies": {
+    "@types/jsonwebtoken": "^9.0.3",
+    "@types/node": "^20.8.0"
+  }
+}
