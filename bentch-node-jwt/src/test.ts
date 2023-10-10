@@ -1,5 +1,5 @@
 import { sign, verify } from "jsonwebtoken";
-import { AuthDto, sign as rust_sign, verify as rust_verify } from "napi-jwt";
+import { AuthDto, sign as rust_sign, verify as rust_verify, signStr, verifyStr } from "napi-jwt";
 import * as fs from "fs";
 import * as path from "path";
 import { exit } from "process";
@@ -60,3 +60,18 @@ for (let i = 0; i < TRY_COUNT; i++) {
 }
 elapsed = Date.now() - now;
 console.log(`rust verifying ${TRY_COUNT} times took ${elapsed}ms`);
+
+
+now = Date.now();
+for (let i = 0; i < TRY_COUNT; i++) {
+    signStr(JSON.stringify(data));
+}
+elapsed = Date.now() - now;
+console.log(`rust signing string ${TRY_COUNT} times took ${elapsed}ms`);
+
+now = Date.now();
+for (let i = 0; i < TRY_COUNT; i++) {
+    verifyStr(token);
+}
+elapsed = Date.now() - now;
+console.log(`rust verifying string ${TRY_COUNT} times took ${elapsed}ms`);

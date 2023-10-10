@@ -234,7 +234,9 @@ if (!nativeBinding) {
   throw new Error(`Failed to load native binding`)
 }
 
-const { sign, verify } = nativeBinding
+const { sign, verify, signStr, verifyStr } = nativeBinding
 
 module.exports.sign = sign
 module.exports.verify = verify
+module.exports.signStr = signStr
+module.exports.verifyStr = verifyStr

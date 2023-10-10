@@ -46,3 +46,34 @@ pub fn verify(token: String) -> Option<AuthDto> {
     _ => None,
   }
 }
+
+#[napi]
+pub fn sign_str(payload: String) -> Option<String> {
+  let dto: AuthDto = serde_json::from_str(&payload).unwrap();
+
+  let token = encode(
+    &Header::new(ALGORITHM),
+    &dto,
+    &EncodingKey::from_ec_pem(PRIVATE_KEY).unwrap(),
+  );
+
+  if token.is_ok() {
+    return Some(token.unwrap());
+  }
+
+  None
+}
+
+#[napi]
+pub fn verify_str(token: String) -> Option<String> {
+  let token_data = decode::<AuthDto>(
+    &token,
+    &DecodingKey::from_ec_pem(PUBLIC_KEY).unwrap(),
+    &Validation::new(ALGORITHM),
+  );
+
+  match token_data {
+    Ok(token_data) => return Some(serde_json::to_string(&token_data.claims).unwrap()),
+    _ => None,
+  }
+}

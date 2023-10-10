@@ -10,3 +10,5 @@ export interface AuthDto {
 }
 export function sign(dto: AuthDto): string | null
 export function verify(token: string): AuthDto | null
+export function signStr(payload: string): string | null
+export function verifyStr(token: string): string | null
